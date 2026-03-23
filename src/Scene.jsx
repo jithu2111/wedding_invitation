@@ -13,6 +13,8 @@ function CameraController() {
     const targetZ = 5 - (scroll.offset * 30);
     // Smoothly animate the camera's Z position
     state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, targetZ, 4, delta);
+    // Always look straight ahead at camera's own Y level — prevents downward angle on tall screens
+    state.camera.lookAt(0, 1, state.camera.position.z - 1);
   });
   
   return null;
@@ -54,7 +56,7 @@ export default function Scene() {
             {/* Page 1 (z=0): Ganesha — renders on canvas behind HTML overlay */}
             <ImagePlane
               texturePath="/images/ganesha.png"
-              position={[0, 0.8, -1]}
+              position={[0, 1, 0]}
               scale={[4, 4, 1]}
               fadeStart={5}
               fadeEnd={15}
