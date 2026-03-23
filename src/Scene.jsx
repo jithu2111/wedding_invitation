@@ -55,8 +55,8 @@ export default function Scene() {
             {/* Kept at 1:1 aspect ratio square, pushed up slightly */}
             <ImagePlane 
               texturePath="/images/ganesha.png" 
-              position={[0, 2.5, 0]} 
-              scale={[3.5, 3.5, 1]} 
+              position={[0, 1.5, 0]} 
+              scale={[3, 3, 1]} 
               fadeStart={5}
               fadeEnd={15}
             />
