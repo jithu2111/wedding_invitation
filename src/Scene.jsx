@@ -1,5 +1,5 @@
 import { Suspense, useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { ScrollControls, Scroll, Sparkles, useScroll } from '@react-three/drei';
 import * as THREE from 'three';
 import ImagePlane from './components/ImagePlane';
@@ -21,6 +21,14 @@ function CameraController() {
 }
 
 export default function Scene() {
+  const { viewport } = useThree();
+  const isMobile = viewport.width < 5;
+  
+  // Ganesh in upper portion: camera looks at y=1, so y > 1 = upper half
+  const ganeshaScale = isMobile ? Math.min(viewport.width * 1.1, 4) : 3.5;
+  // Slightly above center — not too high, keeping it close to the names
+  const ganeshaY = 1 + viewport.height * 0.12;
+
   return (
     <>
       {/* Environment / Background */}
@@ -56,8 +64,8 @@ export default function Scene() {
             {/* Page 1 (z=0): Ganesha — renders on canvas behind HTML overlay */}
             <ImagePlane
               texturePath="/images/ganesha.png"
-              position={[0, 1, 0]}
-              scale={[4, 4, 1]}
+              position={[0, ganeshaY, 0]}
+              scale={[ganeshaScale, ganeshaScale, 1]}
               fadeStart={5}
               fadeEnd={15}
             />
@@ -82,15 +90,19 @@ export default function Scene() {
 
         {/* --- HTML OVERLAYS --- */}
         <Scroll html style={{ width: '100%', height: '100%' }}>
-          {/* Page 1 Overlay — transparent bg, Ganesh shows through from canvas */}
-          <div className="w-screen h-screen flex flex-col items-center justify-center text-center p-8 text-[#faf5f0]" style={{ position: 'absolute', top: '0vh' }}>
-            <h1 className="text-sm tracking-[0.3em] uppercase mb-4 text-[#d4af37]">You are invited</h1>
-            <h2 className="text-5xl font-serif mb-2 font-bold" style={{ textShadow: '0 0 20px rgba(0,0,0,0.8)' }}>Bhargav</h2>
-            <span className="text-3xl italic font-serif text-[#d4af37] my-2">&amp;</span>
-            <h2 className="text-5xl font-serif mt-2 font-bold" style={{ textShadow: '0 0 20px rgba(0,0,0,0.8)' }}>Vaishnavi</h2>
-            <p className="mt-8 text-sm font-sans max-w-md mx-auto opacity-80">
-              Join us in celebrating our beautiful beginning. Scroll down to begin the journey.
-            </p>
+          {/* Page 1 Overlay — names in lower-center, Ganesh shows through upper area */}
+          {/* Page 1 Overlay — Ganesh shows through upper half from canvas */}
+          <div className="w-screen h-screen flex flex-col items-center justify-end text-center pb-[8vh] text-[#faf5f0]" style={{ position: 'absolute', top: '0vh' }}>
+            <h1 className="text-xs tracking-[0.4em] uppercase mb-3 font-bold text-[#ffd700]">You are invited</h1>
+            <h2 className="text-5xl font-serif mb-1 font-bold text-white tracking-wide" style={{ textShadow: '2px 4px 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)' }}>Bhargav</h2>
+            <span className="text-2xl italic font-serif text-[#d4af37] my-2">&amp;</span>
+            <h2 className="text-5xl font-serif mt-1 font-bold text-white tracking-wide" style={{ textShadow: '2px 4px 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)' }}>Vaishnavi</h2>
+
+          <div className="animate-bounce mt-10">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m0 0l-6-6m6 6l6-6" />
+              </svg>
+            </div>
           </div>
 
           {/* Page 2 Overlay */}

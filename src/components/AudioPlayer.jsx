@@ -28,7 +28,7 @@ export default function AudioPlayer() {
       
       <button 
         onClick={togglePlay}
-        className="bg-[#1a0f00]/60 backdrop-blur-md rounded-full p-3 border border-[#d4af37]/30 shadow-lg text-[#d4af37] transition-all hover:scale-110 active:scale-95 flex items-center justify-center cursor-pointer"
+        className="rounded-full p-[10px] border border-[#ffd700] text-[#ffd700] bg-black/40 hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer"
         aria-label="Toggle Audio"
       >
         {isPlaying ? (
