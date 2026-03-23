@@ -24,10 +24,18 @@ export default function Scene() {
   const { viewport } = useThree();
   const isMobile = viewport.width < 5;
   
-  // Ganesh in upper portion: camera looks at y=1, so y > 1 = upper half
+  // Ganesh scale based on width — looks good on all phones
   const ganeshaScale = isMobile ? Math.min(viewport.width * 1.1, 4) : 3.5;
-  // Slightly above center — not too high, keeping it close to the names
+  // Slightly above center
   const ganeshaY = 1 + viewport.height * 0.12;
+
+  // Calculate where Ganesh bottom edge is as a % from top of screen
+  // Camera at y=1, viewport spans from (1 - vh/2) to (1 + vh/2)
+  // Screen top = 1 + vh/2, so % from top = (screenTop - worldY) / vh
+  const ganeshaBottomY = ganeshaY - ganeshaScale / 2;
+  const ganeshaBottomPct = ((1 + viewport.height / 2) - ganeshaBottomY) / viewport.height * 100;
+  // Names start a small gap below the Ganesh bottom
+  const namesTopPct = ganeshaBottomPct + 3;
 
   return (
     <>
@@ -90,15 +98,14 @@ export default function Scene() {
 
         {/* --- HTML OVERLAYS --- */}
         <Scroll html style={{ width: '100%', height: '100%' }}>
-          {/* Page 1 Overlay — names in lower-center, Ganesh shows through upper area */}
-          {/* Page 1 Overlay — Ganesh shows through upper half from canvas */}
-          <div className="w-screen h-screen flex flex-col items-center justify-end text-center pb-[8vh] text-[#faf5f0]" style={{ position: 'absolute', top: '0vh' }}>
-            <h1 className="text-xs tracking-[0.4em] uppercase mb-3 font-bold text-[#ffd700]">You are invited</h1>
-            <h2 className="text-5xl font-serif mb-1 font-bold text-white tracking-wide" style={{ textShadow: '2px 4px 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)' }}>Bhargav</h2>
-            <span className="text-2xl italic font-serif text-[#d4af37] my-2">&amp;</span>
-            <h2 className="text-5xl font-serif mt-1 font-bold text-white tracking-wide" style={{ textShadow: '2px 4px 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)' }}>Vaishnavi</h2>
+          {/* Page 1 Overlay — names pinned at 55% from top, consistent on all screens */}
+          <div className="w-screen flex flex-col items-center text-center text-[#faf5f0]" style={{ position: 'absolute', top: `${namesTopPct}%` }}>
+            <h1 className="tracking-[0.4em] uppercase font-bold text-[#ffd700]" style={{ fontSize: 'min(2.5vw, 1.5vh)', marginBottom: '1.5vh' }}>You are invited</h1>
+            <h2 className="font-serif font-bold text-white tracking-wide" style={{ fontSize: 'min(10vw, 6vh)', textShadow: '2px 4px 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)' }}>Bhargav</h2>
+            <span className="italic font-serif text-[#d4af37]" style={{ fontSize: 'min(6vw, 3.5vh)', margin: '0.5vh 0' }}>&amp;</span>
+            <h2 className="font-serif font-bold text-white tracking-wide" style={{ fontSize: 'min(10vw, 6vh)', textShadow: '2px 4px 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)' }}>Vaishnavi</h2>
 
-          <div className="animate-bounce mt-10">
+            <div className="animate-bounce" style={{ marginTop: '2vh' }}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m0 0l-6-6m6 6l6-6" />
               </svg>
