@@ -51,12 +51,11 @@ export default function Scene() {
         {/* --- 2.5D PARALLAX WORLD --- */}
         <group>
           <Suspense fallback={null}>
-            {/* Page 1 (z=0): Ganesha Placeholder */}
-            {/* Kept at 1:1 aspect ratio square, pushed up slightly */}
-            <ImagePlane 
-              texturePath="/images/ganesha.png" 
-              position={[0, 1.5, 0]} 
-              scale={[3, 3, 1]} 
+            {/* Page 1 (z=0): Ganesha — renders on canvas behind HTML overlay */}
+            <ImagePlane
+              texturePath="/images/ganesha.png"
+              position={[0, 0.8, -1]}
+              scale={[4, 4, 1]}
               fadeStart={5}
               fadeEnd={15}
             />
@@ -81,13 +80,13 @@ export default function Scene() {
 
         {/* --- HTML OVERLAYS --- */}
         <Scroll html style={{ width: '100%', height: '100%' }}>
-          {/* Page 1 Overlay */}
+          {/* Page 1 Overlay — transparent bg, Ganesh shows through from canvas */}
           <div className="w-screen h-screen flex flex-col items-center justify-center text-center p-8 text-[#faf5f0]" style={{ position: 'absolute', top: '0vh' }}>
             <h1 className="text-sm tracking-[0.3em] uppercase mb-4 text-[#d4af37]">You are invited</h1>
-            <h2 className="text-5xl md:text-7xl font-serif mb-2 font-bold drop-shadow-md">Bhargav</h2>
+            <h2 className="text-5xl font-serif mb-2 font-bold" style={{ textShadow: '0 0 20px rgba(0,0,0,0.8)' }}>Bhargav</h2>
             <span className="text-3xl italic font-serif text-[#d4af37] my-2">&amp;</span>
-            <h2 className="text-5xl md:text-7xl font-serif mt-2 font-bold drop-shadow-md">Vaishnavi</h2>
-            <p className="mt-8 text-sm md:text-base font-sans max-w-md mx-auto opacity-80">
+            <h2 className="text-5xl font-serif mt-2 font-bold" style={{ textShadow: '0 0 20px rgba(0,0,0,0.8)' }}>Vaishnavi</h2>
+            <p className="mt-8 text-sm font-sans max-w-md mx-auto opacity-80">
               Join us in celebrating our beautiful beginning. Scroll down to begin the journey.
             </p>
           </div>
