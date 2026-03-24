@@ -13,7 +13,16 @@ export default {
       },
       fontFamily: {
         sans: ['"Inter"', 'sans-serif'],
-        serif: ['"Playfair Display"', 'serif'],
+        serif: ['"Cormorant Garamond"', '"Playfair Display"', 'serif'],
+      },
+      animation: {
+        'nudge': 'nudge 2s ease-in-out infinite',
+      },
+      keyframes: {
+        nudge: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(2px)' },
+        },
       }
     },
   },

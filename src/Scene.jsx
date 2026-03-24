@@ -1,4 +1,5 @@
 import { Suspense, useRef } from 'react';
+import { ChevronsDown } from 'lucide-react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { ScrollControls, Scroll, Sparkles, useScroll } from '@react-three/drei';
 import * as THREE from 'three';
@@ -100,15 +101,13 @@ export default function Scene() {
         <Scroll html style={{ width: '100%', height: '100%' }}>
           {/* Page 1 Overlay — names pinned at 55% from top, consistent on all screens */}
           <div className="w-screen flex flex-col items-center text-center text-[#faf5f0]" style={{ position: 'absolute', top: `${namesTopPct}%` }}>
-            <h1 className="tracking-[0.4em] uppercase font-bold text-[#ffd700]" style={{ fontSize: 'min(2.5vw, 1.5vh)', marginBottom: '1.5vh' }}>You are invited</h1>
-            <h2 className="font-serif font-bold text-white tracking-wide" style={{ fontSize: 'min(10vw, 6vh)', textShadow: '2px 4px 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)' }}>Bhargav</h2>
-            <span className="italic font-serif text-[#d4af37]" style={{ fontSize: 'min(6vw, 3.5vh)', margin: '0.5vh 0' }}>&amp;</span>
-            <h2 className="font-serif font-bold text-white tracking-wide" style={{ fontSize: 'min(10vw, 6vh)', textShadow: '2px 4px 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)' }}>Vaishnavi</h2>
+            <h1 className="uppercase text-[#ffd700]" style={{ fontSize: 'min(3vw, 1vh)', letterSpacing: '0.15em', fontWeight: 500, marginBottom: '2vh', maxWidth: '80vw', lineHeight: 1.6 }}>Together with our families, we invite you to celebrate our union as we embark on a journey of sacred love</h1>
+            <h2 className="font-serif text-[#faf5f0] tracking-[0.08em]" style={{ fontSize: 'min(8vw, 5vh)', fontWeight: 500, textShadow: '0 2px 15px rgba(0,0,0,0.7)' }}>Bhargav</h2>
+            <span className="italic font-serif text-[#d4af37]" style={{ fontSize: 'min(5vw, 3vh)', fontWeight: 300, margin: '0.8vh 0' }}>&amp;</span>
+            <h2 className="font-serif text-[#faf5f0] tracking-[0.08em]" style={{ fontSize: 'min(8vw, 5vh)', fontWeight: 500, textShadow: '0 2px 15px rgba(0,0,0,0.7)' }}>Vaishnavi</h2>
 
-            <div className="animate-bounce" style={{ marginTop: '2vh' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m0 0l-6-6m6 6l6-6" />
-              </svg>
+            <div style={{ marginTop: '2vh', animation: 'nudge 2s ease-in-out infinite' }}>
+              <ChevronsDown size={28} color="#d4af37" strokeWidth={1.5} />
             </div>
           </div>
 
