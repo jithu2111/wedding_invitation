@@ -130,6 +130,18 @@ export default function Scene() {
                 Ravi Mahal Conventions<br/>
                 Suryapet, Telangana
               </p>
+              <a
+                href="https://maps.app.goo.gl/xqkPMP17iqPsMgGv6?g_st=iw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 mt-4 px-4 py-2 text-sm text-[#ffd700] border border-[#ffd700]/40 rounded-full hover:bg-[#ffd700]/10 transition-all"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+                View on Maps
+              </a>
             </div>
             <p className="mt-12 text-sm tracking-widest uppercase text-[#d4af37] animate-pulse">
               We look forward to seeing you
