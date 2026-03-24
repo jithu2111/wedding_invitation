@@ -1,5 +1,3 @@
-import { useGLTF } from '@react-three/drei';
-
 /*
   INSTRUCTIONS FOR 3D MODEL:
   1. Find a beautiful Ganesha 3D model (.glb format)

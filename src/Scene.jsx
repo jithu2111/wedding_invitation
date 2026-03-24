@@ -1,4 +1,4 @@
-import { Suspense, useRef } from 'react';
+import { Suspense } from 'react';
 import { ChevronsDown } from 'lucide-react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { ScrollControls, Scroll, Sparkles, useScroll } from '@react-three/drei';
@@ -127,7 +127,7 @@ export default function Scene() {
               
               <p className="text-lg md:text-xl font-bold mb-2">Venue</p>
               <p className="opacity-80 leading-relaxed">
-                The Grand Palace Gardens<br/>
+                Ravi Mahal Conventions<br/>
                 Suryapet, Telangana
               </p>
             </div>
