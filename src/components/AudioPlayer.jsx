@@ -5,25 +5,28 @@ export default function AudioPlayer() {
   const [isMuted, setIsMuted] = useState(true);
   const hasInteracted = useRef(false);
 
-  // Auto-play on page load
+  // Auto-play on page load, fallback to first user interaction
   useEffect(() => {
-    if (audioRef.current) {
+    const tryPlay = () => {
+      if (hasInteracted.current || !audioRef.current) return;
+      hasInteracted.current = true;
       audioRef.current.play()
         .then(() => setIsMuted(false))
         .catch(() => {
-          // Browser blocked autoplay, try on first interaction
-          const handleInteraction = () => {
-            if (!hasInteracted.current && audioRef.current) {
-              hasInteracted.current = true;
-              audioRef.current.play()
-                .then(() => setIsMuted(false))
-                .catch(e => console.log('Playback prevented', e));
-            }
-          };
-          window.addEventListener('click', handleInteraction, { once: true });
-          window.addEventListener('touchstart', handleInteraction, { once: true });
+          hasInteracted.current = false;
         });
-    }
+    };
+
+    // Try immediate autoplay
+    tryPlay();
+
+    // Fallback: listen for any user interaction
+    const events = ['click', 'touchstart', 'scroll', 'keydown', 'pointerdown'];
+    events.forEach(evt => document.addEventListener(evt, tryPlay, { once: true, capture: true }));
+
+    return () => {
+      events.forEach(evt => document.removeEventListener(evt, tryPlay, { capture: true }));
+    };
   }, []);
 
   const toggleMute = () => {
