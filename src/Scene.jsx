@@ -122,7 +122,7 @@ export default function Scene() {
           <div className="w-screen h-screen flex flex-col items-center justify-center text-center p-8 text-[#faf5f0]" style={{ position: 'absolute', top: '200vh', paddingTop: '10vh' }}>
             <div className="bg-[#1a0f00]/60 backdrop-blur-sm p-8 rounded-lg border border-[#d4af37]/30 shadow-2xl">
               <p className="text-lg md:text-xl font-bold mb-2">Muhurtham</p>
-              <p className="mb-6 opacity-80">Sunday, 12th April 2026<br/>10:30 AM Onwards</p>
+              <p className="mb-6 opacity-80">Sunday, 12th April 2026<br/>10:00 AM Onwards</p>
               
               <p className="text-lg md:text-xl font-bold mb-2">Venue</p>
               <p className="opacity-80 leading-relaxed">
