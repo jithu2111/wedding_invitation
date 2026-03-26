@@ -101,7 +101,7 @@ export default function Scene() {
         <Scroll html style={{ width: '100%', height: '100%' }}>
           {/* Page 1 Overlay — names pinned at 55% from top, consistent on all screens */}
           <div className="w-screen flex flex-col items-center text-center text-[#faf5f0]" style={{ position: 'absolute', top: `${namesTopPct}%` }}>
-            <h1 className="uppercase text-[#ffd700]" style={{ fontSize: 'min(3vw, 1vh)', letterSpacing: '0.15em', fontWeight: 500, marginBottom: '2vh', maxWidth: '80vw', lineHeight: 1.6 }}>Together with our families, we invite you to celebrate our union as we embark on a journey of sacred love</h1>
+            <h1 className="uppercase text-[#ffd700]" style={{ fontSize: 'min(3vw, 1vh)', letterSpacing: '0.15em', fontWeight: 500, maxWidth: '80vw', lineHeight: 1.6 }}>Together with our families, we invite you to celebrate our union as we embark on a journey of sacred love</h1>
             <h2 className="font-serif text-[#faf5f0] tracking-[0.08em]" style={{ fontSize: 'min(8vw, 5vh)', fontWeight: 500, textShadow: '0 2px 15px rgba(0,0,0,0.7)' }}>Bhargav</h2>
             <p className="text-[#d4af37]/80" style={{ fontSize: 'min(2.5vw, 1.4vh)', letterSpacing: '0.05em', maxWidth: '80vw' }}>Elder Son of Smt. &amp; Sri Channa Sridevi - Gopinath</p>
             <span className="italic font-serif text-[#d4af37]" style={{ fontSize: 'min(5vw, 3vh)', fontWeight: 300}}>&amp;</span>
