@@ -1,20 +1,21 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useTexture } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-
-/*
-  INSTRUCTIONS FOR 2.5D PARALLAX:
-  Replace the placeholder transparent PNGs in `public/images/` 
-  with your actual beautiful transparent elements!
-*/
 
 export default function ImagePlane({ texturePath, position, scale, opacity = 1, fadeStart = 10, fadeEnd = 20 }) {
   const texture = useTexture(texturePath);
   const materialRef = useRef();
   const meshRef = useRef();
-  
-  // Custom fade logic based on camera distance to prevent everything overlapping at once
+
+  // Dispose GPU texture memory when this plane unmounts to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (texture) texture.dispose();
+    };
+  }, [texture]);
+
+  // Distance-based fade: planes fade in as camera approaches and fade out as it recedes
   useFrame((state) => {
     if (materialRef.current && meshRef.current) {
       const distance = state.camera.position.distanceTo(meshRef.current.position);
@@ -26,11 +27,11 @@ export default function ImagePlane({ texturePath, position, scale, opacity = 1, 
   return (
     <mesh ref={meshRef} position={position} scale={scale} castShadow={false} receiveShadow={false}>
       <planeGeometry args={[1, 1]} />
-      <meshStandardMaterial 
+      <meshStandardMaterial
         ref={materialRef}
-        map={texture} 
-        transparent={true} 
-        side={THREE.DoubleSide} 
+        map={texture}
+        transparent={true}
+        side={THREE.DoubleSide}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />

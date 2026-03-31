@@ -21,7 +21,7 @@ export default {
       keyframes: {
         nudge: {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(2px)' },
+          '50%': { transform: 'translateY(8px)' },
         },
       }
     },

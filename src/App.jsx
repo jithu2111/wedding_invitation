@@ -4,9 +4,14 @@ import AudioPlayer from './components/AudioPlayer';
 
 function App() {
   return (
-    <div className="w-screen h-screen">
+    <div className="relative w-screen h-screen">
       <AudioPlayer />
-      <Canvas shadows camera={{ position: [0, 1, 5], fov: 60 }}>
+      <Canvas
+        shadows={false}
+        dpr={[1, 2]}
+        gl={{ antialias: false, powerPreference: 'high-performance' }}
+        camera={{ position: [0, 1, 5], fov: 60 }}
+      >
         <Scene />
       </Canvas>
     </div>

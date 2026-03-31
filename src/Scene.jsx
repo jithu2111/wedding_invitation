@@ -25,18 +25,17 @@ export default function Scene() {
   const { viewport } = useThree();
   const isMobile = viewport.width < 5;
   
-  // Ganesh scale based on width — looks good on all phones
-  const ganeshaScale = isMobile ? Math.min(viewport.width * 1.1, 4) : 3.5;
-  // Slightly above center
+  // Ganesh scale capped tighter so the image doesn't push its bottom edge too
+  // far down the screen — especially critical on wide-aspect devices (iPad,
+  // desktop, iPhone SE) where the old cap of 4 / 3.5 consumed >70% of the
+  // viewport height and left insufficient room for the text block below it.
+  // Scale slightly reduced from original (1.1/4 → 1.0/3.5) to prevent overflow on small phones
+  const ganeshaScale = isMobile ? Math.min(viewport.width * 1.0, 3.5) : 3.5;
   const ganeshaY = 1 + viewport.height * 0.12;
 
-  // Calculate where Ganesh bottom edge is as a % from top of screen
-  // Camera at y=1, viewport spans from (1 - vh/2) to (1 + vh/2)
-  // Screen top = 1 + vh/2, so % from top = (screenTop - worldY) / vh
+  // Calculate where Ganesh bottom edge is as a % from top of screen.
   const ganeshaBottomY = ganeshaY - ganeshaScale / 2;
   const ganeshaBottomPct = ((1 + viewport.height / 2) - ganeshaBottomY) / viewport.height * 100;
-  // Names start a small gap below the Ganesh bottom
-  const namesTopPct = ganeshaBottomPct + 3;
 
   return (
     <>
@@ -45,22 +44,21 @@ export default function Scene() {
       
       {/* Global Lighting */}
       <ambientLight intensity={1.5} color="#ffd700" />
-      <directionalLight 
-        position={[10, 20, 5]} 
-        intensity={2} 
-        castShadow 
-        color="#ffebd6" 
+      <directionalLight
+        position={[10, 20, 5]}
+        intensity={2}
+        color="#ffebd6"
       />
       
-      {/* Global Particles (Dense Fireflies) */}
-      <Sparkles 
-        count={1500} 
-        scale={[15, 10, 40]} 
+      {/* Global Particles (Fireflies) — count throttled on mobile to preserve frame rate */}
+      <Sparkles
+        count={isMobile ? 600 : 1200}
+        scale={[15, 10, 40]}
         position={[0, 0, -15]}
-        size={3} 
-        color="#ffd700" 
-        speed={0.2} 
-        opacity={0.8} 
+        size={3}
+        color="#ffd700"
+        speed={0.2}
+        opacity={0.8}
         noise={0.1}
       />
 
@@ -99,16 +97,26 @@ export default function Scene() {
 
         {/* --- HTML OVERLAYS --- */}
         <Scroll html style={{ width: '100%', height: '100%' }}>
-          {/* Page 1 Overlay — names pinned at 55% from top, consistent on all screens */}
-          <div className="w-screen flex flex-col items-center text-center text-[#faf5f0]" style={{ position: 'absolute', top: `${namesTopPct}%` }}>
-            <h1 className="uppercase text-[#ffd700]" style={{ fontSize: 'min(3vw, 1vh)', letterSpacing: '0.15em', fontWeight: 500, maxWidth: '80vw', lineHeight: 1.6 }}>Together with our families, we invite you to celebrate our union as we embark on a journey of sacred love</h1>
-            <h2 className="font-serif text-[#faf5f0] tracking-[0.08em]" style={{ fontSize: 'min(8vw, 5vh)', fontWeight: 500, textShadow: '0 2px 15px rgba(0,0,0,0.7)' }}>Bhargav</h2>
-            <p className="text-[#d4af37]/80" style={{ fontSize: 'min(2.5vw, 1.4vh)', letterSpacing: '0.05em', maxWidth: '80vw' }}>Elder Son of Smt. &amp; Sri Channa Sridevi - Gopinath</p>
-            <span className="italic font-serif text-[#d4af37]" style={{ fontSize: 'min(5vw, 3vh)', fontWeight: 300}}>&amp;</span>
-            <h2 className="font-serif text-[#faf5f0] tracking-[0.08em]" style={{ fontSize: 'min(8vw, 5vh)', fontWeight: 500, textShadow: '0 2px 15px rgba(0,0,0,0.7)' }}>Vaishnavi</h2>
-            <p className="text-[#d4af37]/80" style={{ fontSize: 'min(2.5vw, 1.4vh)', letterSpacing: '0.05em', maxWidth: '80vw' }}>Elder Daughter of Smt. &amp; Sri Vidala Aruna - Upender, R/o. Suryapet</p>
+          {/* Page 1 Overlay — full viewport, content anchored between Ganesha bottom and screen bottom */}
+          <div className="w-screen h-screen flex flex-col items-center text-center text-[#faf5f0]" style={{ position: 'absolute', top: 0 }}>
+            {/* Spacer — clears Ganesha */}
+            <div style={{ height: `${ganeshaBottomPct}%`, flexShrink: 0 }} />
 
-            <div style={{ marginTop: '2vh', animation: 'nudge 2s ease-in-out infinite' }}>
+            {/* Quote + names grouped, centered in remaining space */}
+            <div className="flex flex-col items-center justify-center" style={{ flex: '1 1 0', minHeight: 0 }}>
+              <h1 className="uppercase text-[#ffd700]" style={{ fontSize: 'clamp(9px, 2.5vw, 12px)', letterSpacing: '0.15em', fontWeight: 500, maxWidth: '80vw', lineHeight: 1.6 }}>Together with our families, we invite you to celebrate our union as we embark on a journey of sacred love</h1>
+
+              <div style={{ height: '1.5vh' }} />
+
+              <h2 className="font-serif text-[#faf5f0] tracking-[0.08em]" style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 500, textShadow: '0 2px 15px rgba(0,0,0,0.7)' }}>Bhargav</h2>
+              <p className="text-[#d4af37]/80" style={{ fontSize: 'clamp(10px, 2.5vw, 13px)', letterSpacing: '0.05em', maxWidth: '80vw' }}>Elder Son of Smt. &amp; Sri Channa Sridevi - Gopinath</p>
+              <span className="italic font-serif text-[#d4af37]" style={{ fontSize: 'clamp(20px, 4vw, 28px)', fontWeight: 300 }}>&amp;</span>
+              <h2 className="font-serif text-[#faf5f0] tracking-[0.08em]" style={{ fontSize: 'clamp(28px, 7vw, 44px)', fontWeight: 500, textShadow: '0 2px 15px rgba(0,0,0,0.7)' }}>Vaishnavi</h2>
+              <p className="text-[#d4af37]/80" style={{ fontSize: 'clamp(10px, 2.5vw, 13px)', letterSpacing: '0.05em', maxWidth: '80vw' }}>Elder Daughter of Smt. &amp; Sri Vidala Aruna - Upender, R/o. Suryapet</p>
+            </div>
+
+            {/* Bouncing arrow — always pinned near bottom of viewport */}
+            <div style={{ paddingBottom: '3vh', animation: 'nudge 2s ease-in-out infinite' }}>
               <ChevronsDown size={28} color="#d4af37" strokeWidth={1.5} />
             </div>
           </div>
