@@ -128,31 +128,64 @@ export default function Scene() {
             </p>
           </div>
 
-          {/* Page 3 Overlay */}
-          <div className="w-screen h-screen flex flex-col items-center justify-center text-center p-8 text-[#faf5f0]" style={{ position: 'absolute', top: '200vh', paddingTop: '10vh' }}>
-            <div className="bg-[#1a0f00]/60 backdrop-blur-sm p-8 rounded-lg border border-[#d4af37]/30 shadow-2xl">
-              <p className="text-lg md:text-xl font-bold mb-2">Muhurtham</p>
-              <p className="mb-6 opacity-80">Sunday, 12th April 2026<br/>11:28 AM</p>
-              
-              <p className="text-lg md:text-xl font-bold mb-2">Venue</p>
-              <p className="opacity-80 leading-relaxed">
-                Ravi Mahal Conventions<br/>
-                Suryapet, Telangana
-              </p>
-              <a
-                href="https://maps.app.goo.gl/xqkPMP17iqPsMgGv6?g_st=iw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 mt-4 px-4 py-2 text-sm text-[#ffd700] border border-[#ffd700]/40 rounded-full hover:bg-[#ffd700]/10 transition-all"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>
-                View on Maps
-              </a>
+          {/* Page 3 Overlay — cards centered at 45% from top for consistent mandap alignment */}
+          <div className="w-screen h-screen flex flex-col items-center text-center px-6 text-[#faf5f0]" style={{ position: 'absolute', top: '200vh' }}>
+            {/* Push cards to ~45% from top — consistent across all phones */}
+            <div style={{ height: '38%', flexShrink: 0 }} />
+
+            {/* Two-column layout: Wedding | Reception */}
+            <div className="grid grid-cols-2 gap-4 w-full max-w-lg">
+              {/* Wedding */}
+              <div className="bg-[#1a0f00]/60 backdrop-blur-sm rounded-xl border border-[#d4af37]/30 shadow-2xl flex flex-col items-center" style={{ padding: 'clamp(18px, 4vw, 32px)' }}>
+                <p className="font-serif text-[#ffd700] tracking-widest uppercase" style={{ fontSize: 'clamp(11px, 2.8vw, 14px)', letterSpacing: '0.2em' }}>Wedding</p>
+                <p className="font-serif text-[#faf5f0] mt-2" style={{ fontSize: 'clamp(15px, 4vw, 22px)', fontWeight: 500 }}>Sunday<br/>12th April 2026</p>
+                <p className="text-[#d4af37] mt-1" style={{ fontSize: 'clamp(14px, 3.5vw, 20px)' }}>11:28 AM</p>
+                <p className="text-[#faf5f0]/70 mt-1" style={{ fontSize: 'clamp(10px, 2.2vw, 12px)' }}>Lunch Follows</p>
+
+                <div className="mt-3 opacity-60" style={{ fontSize: 'clamp(11px, 2.5vw, 14px)', lineHeight: 1.5 }}>
+                  Ravi Mahal Conventions<br/>Suryapet, Telangana
+                </div>
+
+                <a
+                  href="https://maps.app.goo.gl/xqkPMP17iqPsMgGv6?g_st=iw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 mt-3 px-3 py-1.5 text-xs text-[#ffd700] border border-[#ffd700]/40 rounded-full hover:bg-[#ffd700]/10 transition-all"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3.5 h-3.5" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
+                  Map
+                </a>
+              </div>
+
+              {/* Reception */}
+              <div className="bg-[#1a0f00]/60 backdrop-blur-sm rounded-xl border border-[#d4af37]/30 shadow-2xl flex flex-col items-center" style={{ padding: 'clamp(18px, 4vw, 32px)' }}>
+                <p className="font-serif text-[#ffd700] tracking-widest uppercase" style={{ fontSize: 'clamp(11px, 2.8vw, 14px)', letterSpacing: '0.2em' }}>Reception</p>
+                <p className="font-serif text-[#faf5f0] mt-2" style={{ fontSize: 'clamp(15px, 4vw, 22px)', fontWeight: 500 }}>Monday<br/>13th April 2026</p>
+                <p className="text-[#d4af37] mt-1" style={{ fontSize: 'clamp(14px, 3.5vw, 20px)' }}>7:00 p.m. onwards</p>
+
+                <div className="mt-3 opacity-60" style={{ fontSize: 'clamp(11px, 2.5vw, 14px)', lineHeight: 1.5 }}>
+                  ARC Gardens<br/>Rajiv Chowk, Miryalaguda
+                </div>
+
+                <a
+                  href="https://maps.app.goo.gl/P91egNcbXAArLRgB6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 mt-3 px-3 py-1.5 text-xs text-[#ffd700] border border-[#ffd700]/40 rounded-full hover:bg-[#ffd700]/10 transition-all"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3.5 h-3.5" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
+                  Map
+                </a>
+              </div>
             </div>
-            <p className="mt-12 text-sm tracking-widest uppercase text-[#d4af37] animate-pulse">
+
+            <p className="mt-6 text-sm tracking-widest uppercase text-[#d4af37] animate-pulse">
               We look forward to seeing you
             </p>
           </div>
