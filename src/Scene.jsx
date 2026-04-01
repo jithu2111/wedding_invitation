@@ -133,12 +133,12 @@ export default function Scene() {
             {/* Push cards to ~45% from top — consistent across all phones */}
             <div style={{ height: '38%', flexShrink: 0 }} />
 
-            {/* Two-column layout: Wedding | Reception */}
-            <div className="grid grid-cols-2 gap-4 w-full max-w-lg">
+            {/* Single card: Wedding | divider | Reception side by side */}
+            <div className="bg-[#1a0f00]/60 backdrop-blur-sm rounded-xl border border-[#d4af37]/30 shadow-2xl w-full max-w-lg flex items-stretch" style={{ padding: 'clamp(18px, 4vw, 32px)' }}>
               {/* Wedding */}
-              <div className="bg-[#1a0f00]/60 backdrop-blur-sm rounded-xl border border-[#d4af37]/30 shadow-2xl flex flex-col items-center" style={{ padding: 'clamp(18px, 4vw, 32px)' }}>
+              <div className="flex-1 flex flex-col items-center">
                 <p className="font-serif text-[#ffd700] tracking-widest uppercase" style={{ fontSize: 'clamp(11px, 2.8vw, 14px)', letterSpacing: '0.2em' }}>Wedding</p>
-                <p className="font-serif text-[#faf5f0] mt-2" style={{ fontSize: 'clamp(15px, 4vw, 22px)', fontWeight: 500 }}>Sunday<br/>12th April 2026</p>
+                <p className="font-serif text-[#faf5f0] mt-2" style={{ fontSize: 'clamp(14px, 3.5vw, 20px)', fontWeight: 500 }}>Sunday<br/>12th April 2026</p>
                 <p className="text-[#d4af37] mt-1" style={{ fontSize: 'clamp(14px, 3.5vw, 20px)' }}>11:28 AM</p>
                 <p className="text-[#faf5f0]/70 mt-1" style={{ fontSize: 'clamp(10px, 2.2vw, 12px)' }}>Lunch Follows</p>
 
@@ -160,11 +160,18 @@ export default function Scene() {
                 </a>
               </div>
 
+              {/* Vertical decorative divider */}
+              <div className="flex flex-col items-center mx-3">
+                <div className="flex-1 border-l border-[#d4af37]/30" />
+                <span className="text-[#d4af37]/50 my-2" style={{ fontSize: '10px' }}>&#10022;</span>
+                <div className="flex-1 border-l border-[#d4af37]/30" />
+              </div>
+
               {/* Reception */}
-              <div className="bg-[#1a0f00]/60 backdrop-blur-sm rounded-xl border border-[#d4af37]/30 shadow-2xl flex flex-col items-center" style={{ padding: 'clamp(18px, 4vw, 32px)' }}>
+              <div className="flex-1 flex flex-col items-center">
                 <p className="font-serif text-[#ffd700] tracking-widest uppercase" style={{ fontSize: 'clamp(11px, 2.8vw, 14px)', letterSpacing: '0.2em' }}>Reception</p>
-                <p className="font-serif text-[#faf5f0] mt-2" style={{ fontSize: 'clamp(15px, 4vw, 22px)', fontWeight: 500 }}>Monday<br/>13th April 2026</p>
-                <p className="text-[#d4af37] mt-1" style={{ fontSize: 'clamp(14px, 3.5vw, 20px)' }}>7:00 p.m. onwards</p>
+                <p className="font-serif text-[#faf5f0] mt-2" style={{ fontSize: 'clamp(14px, 3.5vw, 20px)', fontWeight: 500 }}>Monday<br/>13th April 2026</p>
+                <p className="text-[#d4af37] mt-1" style={{ fontSize: 'clamp(14px, 3.5vw, 20px)' }}>7:00 p.m.<br/>onwards</p>
 
                 <div className="mt-3 opacity-60" style={{ fontSize: 'clamp(11px, 2.5vw, 14px)', lineHeight: 1.5 }}>
                   ARC Gardens<br/>Rajiv Chowk, Miryalaguda
